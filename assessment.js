@@ -19,17 +19,29 @@ assessmentButton.addEventListener(
     }
     resultDivision.innerText = '';
 
-    const heading = document.createElement('h3');
-    heading.innerText = '診断結果';
-    resultDivision.appendChild(heading);
+
+    // headerDivision の作成
+    const headerDivision = document.createElement('div');
+    headerDivision.setAttribute('class', 'card-header text-bg-primary');
+    headerDivision.innerText = '診断結果';
+
+    // bodyDivision の作成
+    const bodyDivision = document.createElement('div');
+    bodyDivision.setAttribute('class', 'card-body');
 
     const paragraph = document.createElement('p');
+    paragraph.setAttribute('class', 'card-text');
     const result = assessment(userName);
-
-
-
     paragraph.innerText = result;
-    resultDivision.appendChild(paragraph);
+    bodyDivision.appendChild(paragraph);
+
+    // resultDivision に Bootstrap のスタイルを適用する
+    resultDivision.setAttribute('class', 'card');
+
+    // headerDivision と bodyDivision を resultDivision に差し込む
+    resultDivision.appendChild(headerDivision);
+    resultDivision.appendChild(bodyDivision);
+
     // tweetエリアの作成
     tweetDivision.innerText = "";
     const anchor = document.createElement("a");
@@ -51,13 +63,12 @@ assessmentButton.addEventListener(
 
 
 userNameInput.addEventListener(
-  "keydown" , 
+  "keydown",
   (e) => {
-    if(e.code === "Enter")
-      {
-        assessmentButton.dispatchEvent(new Event("click"));
+    if (e.code === "Enter") {
+      assessmentButton.dispatchEvent(new Event("click"));
+    }
   }
-}
 )
 const anser = [
   "###userName###のいいところは声です。###userName###の特徴的な声は皆を惹きつけ、心に残ります。",
